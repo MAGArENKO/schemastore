@@ -1,0 +1,200 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://www.schemastore.org/linear-import.json",
+  "title": "Linear import data",
+  "description": "JSON schema for data imported into Linear from Jira, Asana, Shortcut, Trello, GitHub, and other tools. Used when migrating issues to Linear via the @linear/import CLI or in-product import assistants.\nhttps://linear.app/docs/import-issues\nhttps://linear.app/switch/migration-guide",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["issues"],
+  "properties": {
+    "issues": {
+      "type": "array",
+      "description": "Issues to import into Linear",
+      "items": {
+        "$ref": "#/definitions/issue"
+      }
+    },
+    "statuses": {
+      "type": "object",
+      "description": "Workflow status definitions keyed by ID",
+      "additionalProperties": {
+        "$ref": "#/definitions/status"
+      }
+    },
+    "users": {
+      "type": "object",
+      "description": "User mappings keyed by ID for assignee resolution",
+      "additionalProperties": {
+        "$ref": "#/definitions/user"
+      }
+    },
+    "labels": {
+      "type": "object",
+      "description": "Label definitions keyed by ID",
+      "additionalProperties": {
+        "$ref": "#/definitions/label"
+      }
+    },
+    "resourceURLSuffix": {
+      "type": "string",
+      "description": "Suffix to append to resource URLs (e.g. for authentication)"
+    }
+  },
+  "definitions": {
+    "issue": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Issue title"
+        },
+        "description": {
+          "type": "string",
+          "description": "Issue description in Markdown"
+        },
+        "status": {
+          "type": "string",
+          "description": "Workflow status name"
+        },
+        "assigneeId": {
+          "type": "string",
+          "description": "ID of assigned user from users mapping"
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4,
+          "description": "Priority from 0 (none) to 4. 1 is highest priority"
+        },
+        "comments": {
+          "type": "array",
+          "description": "Issue comments",
+          "items": {
+            "$ref": "#/definitions/comment"
+          }
+        },
+        "labels": {
+          "type": "array",
+          "description": "Label IDs or names",
+          "items": {
+            "type": "string"
+          }
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to original issue in source tool"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the issue was created"
+        },
+        "dueDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Due date in yyyy-MM-dd format"
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the issue was completed"
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When work was started on the issue"
+        },
+        "archived": {
+          "type": "boolean",
+          "description": "Whether the issue is archived"
+        },
+        "estimate": {
+          "type": "number",
+          "description": "Issue estimate (e.g. story points)"
+        }
+      },
+      "required": ["title"]
+    },
+    "comment": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "body": {
+          "type": "string",
+          "description": "Comment body in Markdown"
+        },
+        "userId": {
+          "type": "string",
+          "description": "ID of user who posted the comment"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the comment was created"
+        }
+      },
+      "required": ["userId"]
+    },
+    "status": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Status display name"
+        },
+        "color": {
+          "type": "string",
+          "description": "Hex color for the status"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["backlog", "unstarted", "started", "completed", "canceled"],
+          "description": "Linear workflow state type"
+        }
+      }
+    },
+    "user": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "User display name"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User email for account mapping"
+        },
+        "avatarUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to user avatar"
+        }
+      },
+      "required": ["name"]
+    },
+    "label": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Label display name"
+        },
+        "color": {
+          "type": "string",
+          "description": "Hex color for the label"
+        },
+        "description": {
+          "type": "string",
+          "description": "Label description"
+        }
+      },
+      "required": ["name"]
+    }
+  }
+}

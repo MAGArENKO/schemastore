@@ -3910,6 +3910,16 @@
       "url": "https://w3id.org/linkml/meta.schema.json"
     },
     {
+      "name": "Linear import data",
+      "description": "Data format for importing issues into Linear from Jira, Asana, Shortcut, Trello, and GitHub",
+      "fileMatch": [
+        "linear-import.json",
+        "**/linear-import*.json",
+        "**/linear-migration*.json"
+      ],
+      "url": "https://www.schemastore.org/linear-import.json"
+    },
+    {
       "name": "Lively Properties",
       "description": "Lively Wallpaper configuration file. Documentation: https://github.com/rocksdanister/lively/wiki/Web-Guide-IV-:-Interaction#lively-properties",
       "fileMatch": ["LivelyProperties.json"],
