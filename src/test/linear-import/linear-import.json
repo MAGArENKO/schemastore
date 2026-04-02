@@ -1,0 +1,51 @@
+{
+  "issues": [
+    {
+      "comments": [
+        {
+          "body": "Started implementation",
+          "createdAt": "2025-03-01T10:00:00Z",
+          "userId": "user-1"
+        }
+      ],
+      "description": "Integrate with Zendesk for customer support tickets.",
+      "dueDate": "2025-04-15",
+      "estimate": 3,
+      "labels": ["feature", "backend"],
+      "priority": 1,
+      "status": "started",
+      "title": "Customer Support Integration",
+      "url": "https://jira.example.com/browse/PROJ-123"
+    },
+    {
+      "description": "Optimize database queries for the dashboard.",
+      "labels": ["performance"],
+      "priority": 2,
+      "status": "backlog",
+      "title": "Performance Optimization"
+    }
+  ],
+  "labels": {
+    "label-1": {
+      "color": "#0052CC",
+      "name": "feature"
+    },
+    "label-2": {
+      "color": "#36B37E",
+      "name": "backend"
+    }
+  },
+  "statuses": {
+    "status-1": {
+      "color": "#0052CC",
+      "name": "In Progress",
+      "type": "started"
+    }
+  },
+  "users": {
+    "user-1": {
+      "email": "jane@example.com",
+      "name": "Jane Doe"
+    }
+  }
+}
